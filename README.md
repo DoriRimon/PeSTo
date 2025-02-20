@@ -21,6 +21,17 @@ conda env create -f pesto.yml
 conda activate pesto
 ```
 
+If this code doesn't work, you can run the following:
+```
+conda create -n pestocus python=3.9 # python 3.9 to be supported by gemmi
+conda activate pestocus
+conda install pytorch=2.0.1 pytorch-cuda=11.8 -c pytorch -c nvidia # pytorch with CUDA support
+conda install conda-forge::gemmi
+conda install conda-forge::tensorboard
+conda install numpy scipy pandas matplotlib scikit-learn conda-forge::tqdm
+conda install anaconda::h5py
+```
+
 Or installing manually de dependencies
 
 ```

@@ -30,6 +30,7 @@ conda install conda-forge::gemmi
 conda install conda-forge::tensorboard
 conda install numpy scipy pandas matplotlib scikit-learn conda-forge::tqdm
 conda install anaconda::h5py
+conda install jupterlab numpy<2
 ```
 
 Or installing manually de dependencies

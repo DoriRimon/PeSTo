@@ -3,24 +3,18 @@ import sys
 import torch as pt
 from tqdm import tqdm
 from glob import glob
-import numpy as np
 
-# sys.path.append('..')
+sys.path.append('..')
 
 from src.dataset import StructuresDataset, collate_batch_features
 from src.data_encoding import encode_structure, encode_features, extract_topology
 from src.structure import encode_bfactor, concatenate_chains, split_by_chain
 from src.structure_io import save_pdb
-
-from .logging_utils import logger
-    
-# load functions
 from model import Model
+from config import config_model
 
 
 def load_model(model_filepath: str, device: pt.device) -> Model:
-    from config import config_model
-    
     model = Model(config_model)
     model.load_state_dict(pt.load(model_filepath, map_location=pt.device("cpu")))
     model = model.eval().to(device)

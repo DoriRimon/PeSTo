@@ -9,14 +9,15 @@ from src.base.models.PeSTo.src.data_encoding import encode_structure, encode_fea
 
 
 class PeSTO(GenericModel, torch.nn.Module):
-    def __init__(self, model_path: str = 'src/base/models/PeSTO/model/save/i_v4_1_2021-09-07_11-21', device: str = 'cpu'):
+    def __init__(self, model_path: str = 'src/base/models/PeSTo/model/save/i_v4_1_2021-09-07_11-21', device: str = 'cpu'):
+        super().__init__()
         self.model_path = model_path
         self.device = torch.device(device)
         self.model_checkpoint_path = os.path.join(model_path, 'model_ckpt.pt')
 
         # add module to path
-        if model_path not in sys.path:
-            sys.path.insert(0, model_path)
+        if self.model_path not in sys.path:
+            sys.path.insert(0, self.model_path)
             
         # load functions
         from config import config_model, config_data

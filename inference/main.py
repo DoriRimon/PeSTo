@@ -35,4 +35,4 @@ dataset = create_dataset(args.data_path)
 
 logger.info('Starting to inference PeSTO over dataset')
 inference_save_dataset(dataset, model, device, verbose=True)
-logger.info('Finished PeSTO extracting and saving successfuly')
+logger.info('Finished PeSTO extraction and saving successfuly')

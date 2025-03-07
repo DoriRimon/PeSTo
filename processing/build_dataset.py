@@ -29,11 +29,13 @@ config_dataset = {
     ]),
 
     # input filepaths
-    "pdb_filepaths": glob("data/all_biounits/*/*.pdb[0-9]*.gz"),
+    "pdb_filepaths": glob("/home/iscb/wolfson/doririmon/home/order/ubinet/pesto/C_structured/PeSToIntegration/assets/data/structures/pdb/*/*pdb[0-9]*.gz"),
+    # "pdb_filepaths": glob("data/all_biounits/*/*.pdb[0-9]*.gz"),
     # "pdb_filepaths": glob(f"/tmp/{sys.argv[-1]}/all_biounits/*/*.pdb[0-9]*.gz"),
 
     # output filepath
-    "dataset_filepath": "data/datasets/contacts_rr5A_64nn_8192_wat.h5",
+    "dataset_filepath": "/home/iscb/wolfson/doririmon/home/order/ubinet/pesto/C_structured/PeSToIntegration/assets/data/pesto/data/datasets/contacts_rr5A_64nn_8192_wat.h5",
+    # "dataset_filepath": "data/datasets/contacts_rr5A_64nn_8192_wat.h5",
     # "dataset_filepath": f"/tmp/{sys.argv[-1]}/contacts_rr5A_64nn_8192.h5",
 }
 
@@ -174,9 +176,14 @@ def store_dataset_items(hf, pdbid, bid, structures_data, contacts_data):
 
 
 if __name__ == "__main__":
+    print('starting dataset building')
     # set up dataset
     dataset = StructuresDataset(config_dataset['pdb_filepaths'], with_preprocessing=False)
+    
+    print('successfuly read structure:', dataset[0][1])
+    
     dataloader = pt.utils.data.DataLoader(dataset, batch_size=None, shuffle=True, num_workers=16, pin_memory=False, prefetch_factor=4)
+    print(f'created dataloader - dataset size: {len(dataset)}')
 
     # define device
     device = pt.device("cuda")
@@ -199,9 +206,12 @@ if __name__ == "__main__":
                 continue
 
             # parse filepath
-            m = re.match(r'.*/([a-z0-9]*)\.pdb([0-9]*)\.gz', pdb_filepath)
-            pdbid = m[1]
-            bid = m[2]
+            # m = re.match(r'.*/([a-z0-9]*)\.pdb([0-9]*)\.gz', pdb_filepath)
+            # pdbid = m[1]
+            # bid = m[2]
+
+            m = re.match(r'.*/pdb/([a-z0-9]+)/pdb([a-z0-9]+)\.ent\.gz', pdb_filepath)
+            bid, pdbid = m[1], m[2]
 
             # check size
             if structure['xyz'].shape[0] >= config_dataset['max_num_atoms']:

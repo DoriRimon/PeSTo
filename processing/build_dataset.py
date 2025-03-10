@@ -28,8 +28,9 @@ config_dataset = {
         'CLR', 'CDL', 'RET'
     ]),
 
-    # input filepaths
-    "pdb_filepaths": glob("/home/iscb/wolfson/doririmon/home/order/ubinet/pesto/C_structured/PeSToIntegration/assets/data/structures/pdb/*/*pdb[0-9]*.gz"),
+    # input filepaths ( TODO : took only zc for fast run check )
+    "pdb_filepaths": glob("/home/iscb/wolfson/doririmon/home/order/ubinet/pesto/C_structured/PeSToIntegration/assets/data/structures/pdb/zc/*pdb[0-9]*.gz"),
+    # "pdb_filepaths": glob("/home/iscb/wolfson/doririmon/home/order/ubinet/pesto/C_structured/PeSToIntegration/assets/data/structures/pdb/*/*pdb[0-9]*.gz"),
     # "pdb_filepaths": glob("data/all_biounits/*/*.pdb[0-9]*.gz"),
     # "pdb_filepaths": glob(f"/tmp/{sys.argv[-1]}/all_biounits/*/*.pdb[0-9]*.gz"),
 
